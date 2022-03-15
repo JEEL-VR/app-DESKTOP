@@ -7,9 +7,12 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+import com.sun.prism.paint.Color;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,8 +55,9 @@ public class DesktopViewController {
 			Image image = new Image(input, 10, 10, false, false);
 			ImageView imageView = new ImageView(image);
 
-			// Delete button
+			// Button for delete
 			Button delButton = new Button("", imageView);
+			
 
 			// Delete course
 			JSONObject id = (JSONObject) courses.get(x).get("_id");
@@ -63,12 +67,15 @@ public class DesktopViewController {
 			// Details course
 			String desc = courses.get(x).get("description").toString();
 			String strTitle = courses.get(x).get("title").toString();
-			title.setOnMouseClicked(e -> titleCourse.setText(strTitle));
-			title.setOnMouseClicked(e -> descCourse.setText(desc));
-
+			title.setOnMouseClicked(e ->{
+				titleCourse.setText(strTitle);
+				descCourse.setText(desc);
+			});
+			
 			// make GridPane
 			listCourses.add(title, 0, x);
 			listCourses.add(delButton, 1, x);
+			listCourses.setAlignment(Pos.CENTER);
 		}
 	}
 	public void showNewCourse(ActionEvent event) {

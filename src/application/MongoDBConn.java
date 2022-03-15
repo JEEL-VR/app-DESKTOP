@@ -1,30 +1,24 @@
 package application;
 
-import java.net.UnknownHostException;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class MongoDBConn {
-
-	public static void main(String[] args) {
-		conn("courses");
-	}
+	private final static Dotenv DOTENV = Dotenv.load();
 
 	public static ArrayList<String> conn(String colName) {
-		MongoClientURI uri = new MongoClientURI(
-				"mongodb+srv://alex:larios@cluster0.l5cfv.mongodb.net/classVRroom?retryWrites=true&w=majority");
+		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
 
 		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente");
@@ -42,8 +36,7 @@ public class MongoDBConn {
 	}
 	
 	public static void delete(String colName, String ID) {
-		MongoClientURI uri = new MongoClientURI(
-				"mongodb+srv://alex:larios@cluster0.l5cfv.mongodb.net/classVRroom?retryWrites=true&w=majority");
+		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
 
 		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente");
@@ -55,8 +48,7 @@ public class MongoDBConn {
 	}
 	
 	public static void insert(String colName, Document doc) {
-		MongoClientURI uri = new MongoClientURI(
-				"mongodb+srv://alex:larios@cluster0.l5cfv.mongodb.net/classVRroom?retryWrites=true&w=majority");
+		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
 
 		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente");
@@ -68,8 +60,7 @@ public class MongoDBConn {
 	}
 
 	public static ArrayList<String> connByItem(String colName, String item, String value) {
-		MongoClientURI uri = new MongoClientURI(
-				"mongodb+srv://alex:larios@cluster0.l5cfv.mongodb.net/classVRroom?retryWrites=true&w=majority");
+		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
 
 		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente");

@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Users/alexl/OneDrive/Escritorio/CICLOS/AMS2/PROJECTES/ClassVRRoom/jar/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/alexl/OneDrive/Escritorio/CICLOS/AMS2/PROJECTES/ClassVRRoom/jar/mongo-java-driver-3.12.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/alexl/OneDrive/Escritorio/CICLOS/AMS2/PROJECTES/ClassVRRoom/jar/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/alexl/OneDrive/Escritorio/CICLOS/AMS2/PROJECTES/ClassVRRoom/jar/java-dotenv-5.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

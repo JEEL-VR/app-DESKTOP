@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,7 +42,7 @@ public class createCourseController {
 	public void insertCourse(ActionEvent event) throws FileNotFoundException, IOException, ParseException {
 		
 		if (description.getText().isEmpty() || name.getText().isEmpty()) {
-			System.out.println("RELLENA TODOS LOS CAMPOS");
+			dialog();
 		} else {
 			Courses.addCourse(name.getText(), description.getText());
 			Stage stage = (Stage) insertButton.getScene().getWindow();
@@ -48,5 +50,13 @@ public class createCourseController {
 			Desktop.initRootLayout();
 		}
 
+	}
+	
+	public void dialog() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("ERROR");
+		alert.setHeaderText(null);
+		alert.setContentText("Rellena todos los campos");
+		alert.showAndWait();
 	}
 }
