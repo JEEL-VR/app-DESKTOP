@@ -9,8 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Desktop extends Application {
-	private Stage primaryStage;
-	private AnchorPane rootLayout;
+	private static Stage primaryStage;
+	private static AnchorPane rootLayout;
 	private ObservableList<Courses> coursesData = FXCollections.observableArrayList();
 	
 	@Override
@@ -24,7 +24,7 @@ public class Desktop extends Application {
 		
 	}
 	
-	public void initRootLayout() {
+	public static void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Desktop.class.getResource("deskView.fxml"));
