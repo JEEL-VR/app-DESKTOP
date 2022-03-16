@@ -20,8 +20,7 @@ public class Desktop extends Application {
 		
 		initRootLayout();
 		
-		showPersonOverview();
-		
+		showPersonOverview();	
 	}
 	
 	public static void initRootLayout() {
@@ -35,6 +34,7 @@ public class Desktop extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
