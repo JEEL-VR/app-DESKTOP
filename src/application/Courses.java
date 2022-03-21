@@ -25,9 +25,10 @@ import javafx.collections.ObservableList;
 
 public class Courses {
 	static ArrayList<JSONObject> jCourses;
+	static JSONObject jCourse;
 
 	public static void main(String[] args) throws Exception {
-		addCourse("Curso 7", "Desc del curso 7");
+		
 	}
 
 	public static void getAllCourses() {
@@ -44,7 +45,20 @@ public class Courses {
 			}
 		});
 	}
-
+	
+	public static void updateCourse(JSONObject item) {
+		MongoDBConn conn = new MongoDBConn();
+		conn.update("courses", item);
+	}
+	public static void getUser(String id) throws ParseException {
+		//TEST : "622f69692d0eb62c6f5befd1"
+		JSONParser jsonParser = new JSONParser();
+		MongoDBConn conn = new MongoDBConn();
+		ArrayList<String> users = conn.connByID("users", id);
+		jCourse = new JSONObject();
+		jCourse = parseCourseObject(users.get(0));
+	}
+	
 	public static void deleteCourse(String id) {
 		MongoDBConn conn = new MongoDBConn();
 		conn.delete("courses", id);
@@ -57,9 +71,6 @@ public class Courses {
 		return oneCourse;
 	}
 
-	public static ArrayList<JSONObject> getjCourses() {
-		return jCourses;
-	}
 
 	public static void addCourse(String title, String desc) throws FileNotFoundException, IOException, ParseException {
 		// parsing file "JSONExample.json"
@@ -89,23 +100,36 @@ public class Courses {
 	        JsonElement element = entry.getValue();
 	        if (element.isJsonPrimitive()) {
 	        	if(entry.getKey().equals(item)) {
-	        		System.out.println("OLD "+ item.toUpperCase() + ": " + entry.getValue());
-	        		js.addProperty(entry.getKey(), value);
-	        		System.out.println("NEW "+ item.toUpperCase() + ": " + entry.getValue());
-	        		
+	        		js.addProperty(entry.getKey(), value);	        		
 	        		System.out.println(item.toUpperCase() + " actualizado correctamente");
 	        	}
 	        }
 	    }
 	}
 	
-	/* PARA ACTUALIZAR DATOS ANIDADOS
-	 * private static void parseJsonArray(JsonArray asJsonArray) { for (int index =
-	 * 0; index < asJsonArray.size(); index++) { JsonElement element =
-	 * asJsonArray.get(index); if (element.isJsonArray()) {
-	 * parseJsonArray(element.getAsJsonArray()); } else if (element.isJsonObject())
-	 * { updateValues(element.getAsJsonObject()); }
-	 * 
-	 * } }
-	 */
+	
+	public static JSONObject getUserCourse(JSONObject course) { // Courses.getCourse();
+		JSONObject subscribers = new JSONObject();
+		subscribers = (JSONObject) course.get("subscribers");
+		return subscribers;
+	}
+	
+	public static ArrayList<JSONObject> getjCourses() {
+		return jCourses;
+	}
+
+	public static JSONObject getjCourse() {
+		return jCourse;
+	}
+	
+	
+	 //PARA ACTUALIZAR DATOS ANIDADOS
+//	  private static void parseJsonArray(JsonArray asJsonArray) { for (int index =
+//	  0; index < asJsonArray.size(); index++) { JsonElement element =
+//	  asJsonArray.get(index); if (element.isJsonArray()) {
+//	  parseJsonArray(element.getAsJsonArray()); } else if (element.isJsonObject())
+//	  { updateValues(element.getAsJsonObject(), ); }
+//	  
+//	  } }
+	 
 }
