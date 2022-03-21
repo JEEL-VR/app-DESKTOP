@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,10 +24,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -181,7 +185,11 @@ public class DesktopViewController {
 			// Delete course
 			JSONObject id = (JSONObject) thisCourse.get("_id");
 			delButton.setId(id.get("$oid").toString());
-			delButton.setOnMouseClicked(e -> Courses.deleteCourse(id.get("$oid").toString()));
+			delButton.setOnMouseClicked(e ->{
+				if (dialog().get() == ButtonType.OK){
+					Courses.deleteCourse(id.get("$oid").toString());
+				}
+			});
 			
 			// Details course
 			JSONObject usersCourse = new JSONObject();
@@ -249,6 +257,7 @@ public class DesktopViewController {
 				});				
 				
 				usersToStudents.setOnMouseClicked(a ->{
+					dialog();
 					JSONObject user = (JSONObject) usersList.getSelectionModel().getSelectedItem();
 					JSONObject userID = (JSONObject) user.get("_id");
 					if(usersList.getSelectionModel().getSelectedItem() != null) {
@@ -299,8 +308,10 @@ public class DesktopViewController {
 				});				
 				
 				usersToTeachers.setOnMouseClicked(a ->{
+					dialog();
 					JSONObject user = (JSONObject) usersList.getSelectionModel().getSelectedItem();
 					JSONObject userID = (JSONObject) user.get("_id");
+					
 					if(usersList.getSelectionModel().getSelectedItem() != null) {
 						JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
 						JSONArray teachersArray = (JSONArray) subscribersObject.get("teachers");
@@ -372,9 +383,6 @@ public class DesktopViewController {
 				setText(empty ? null : users.get("username").toString());
 			}
 		});
-//		for(int a = 0; a < array.size(); a++) {
-//			list.getItems().add(array.get(a));
-//		}
 	}
 	
 
@@ -398,7 +406,15 @@ public class DesktopViewController {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static Optional<ButtonType> dialog() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("CONFIRMACION");
+		alert.setContentText("ESTAS SEGUR D'ELIMINAR AQUEST CURS?");
+		alert.setHeaderText(null);
+		return alert.showAndWait();
+	}
+	
 	public static ArrayList<JSONObject> getUsers() {
 		return users;
 	}
