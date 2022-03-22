@@ -11,18 +11,19 @@ import java.util.Optional;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.sun.prism.paint.Color;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -183,10 +184,11 @@ public class DesktopViewController {
 			
 
 			// Delete course
+			int f = x;
 			JSONObject id = (JSONObject) thisCourse.get("_id");
 			delButton.setId(id.get("$oid").toString());
-			delButton.setOnMouseClicked(e ->{
-				if (dialog().get() == ButtonType.OK){
+			delButton.setOnMouseClicked(e -> {
+				if (dialog().get() == ButtonType.OK) {
 					Courses.deleteCourse(id.get("$oid").toString());
 				}
 			});
@@ -257,7 +259,6 @@ public class DesktopViewController {
 				});				
 				
 				usersToStudents.setOnMouseClicked(a ->{
-					dialog();
 					JSONObject user = (JSONObject) usersList.getSelectionModel().getSelectedItem();
 					JSONObject userID = (JSONObject) user.get("_id");
 					if(usersList.getSelectionModel().getSelectedItem() != null) {
@@ -273,12 +274,12 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-					ArrayList<String> studentsArray = new ArrayList<String>();
-					for(int s = 0; s < studentsJSON.size(); s++) {
-						studentsArray.add(studentsJSON.get(s).toString());
-					}
+//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
+//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
+//					ArrayList<String> studentsArray = new ArrayList<String>();
+//					for(int s = 0; s < studentsJSON.size(); s++) {
+//						studentsArray.add(studentsJSON.get(s).toString());
+//					}
 					Courses.updateCourse(thisCourse);				
 				});
 				
@@ -298,17 +299,16 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-					ArrayList<String> studentsArray = new ArrayList<String>();
-					for(int s = 0; s < studentsJSON.size(); s++) {
-						studentsArray.add(studentsJSON.get(s).toString());
-					}
+//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
+//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
+//					ArrayList<String> studentsArray = new ArrayList<String>();
+//					for(int s = 0; s < studentsJSON.size(); s++) {
+//						studentsArray.add(studentsJSON.get(s).toString());
+//					}
 					Courses.updateCourse(thisCourse);
 				});				
 				
 				usersToTeachers.setOnMouseClicked(a ->{
-					dialog();
 					JSONObject user = (JSONObject) usersList.getSelectionModel().getSelectedItem();
 					JSONObject userID = (JSONObject) user.get("_id");
 					
@@ -325,12 +325,12 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-					JSONArray teachersJSON = (JSONArray) subscribersObject.get("students");
-					ArrayList<String> teachersArray = new ArrayList<String>();
-					for(int s = 0; s < teachersJSON.size(); s++) {
-						teachersArray.add(teachersJSON.get(s).toString());
-					}
+//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
+//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("students");
+//					ArrayList<String> teachersArray = new ArrayList<String>();
+//					for(int s = 0; s < teachersJSON.size(); s++) {
+//						teachersArray.add(teachersJSON.get(s).toString());
+//					}
 					Courses.updateCourse(thisCourse);
 				});
 				
@@ -350,12 +350,12 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-					JSONArray teachersJSON = (JSONArray) subscribersObject.get("teachers");
-					ArrayList<String> teachersArray = new ArrayList<String>();
-					for(int s = 0; s < teachersJSON.size(); s++) {
-						teachersArray.add(teachersJSON.get(s).toString());
-					}
+//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
+//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("teachers");
+//					ArrayList<String> teachersArray = new ArrayList<String>();
+//					for(int s = 0; s < teachersJSON.size(); s++) {
+//						teachersArray.add(teachersJSON.get(s).toString());
+//					}
 					Courses.updateCourse(thisCourse);
 				});				
 			});
