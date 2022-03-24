@@ -39,6 +39,7 @@ public class createCourseController {
 		
 	}
 	
+	
 	public void insertCourse(ActionEvent event) throws FileNotFoundException, IOException, ParseException {
 		
 		if (description.getText().isEmpty() || name.getText().isEmpty()) {
@@ -52,7 +53,7 @@ public class createCourseController {
 
 	}
 	
-	public void dialog() {
+	public static void dialog() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("ERROR");
 		alert.setHeaderText(null);
