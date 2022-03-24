@@ -32,8 +32,7 @@ public class Courses {
 
 	public static void getAllCourses() {
 		JSONParser jsonParser = new JSONParser();
-		MongoDBConn conn = new MongoDBConn();
-		ArrayList<String> courses = conn.conn("courses");
+		ArrayList<String> courses = MongoDBConn.conn("courses");
 		jCourses = new ArrayList<JSONObject>();
 		courses.forEach(c -> {
 			try {
@@ -46,21 +45,18 @@ public class Courses {
 	}
 	
 	public static void updateCourse(JSONObject item) {
-		MongoDBConn conn = new MongoDBConn();
-		conn.update("courses", item);
+		MongoDBConn.update("courses", item);
 	}
 	public static void getUser(String id) throws ParseException {
 		//TEST : "622f69692d0eb62c6f5befd1"
 		JSONParser jsonParser = new JSONParser();
-		MongoDBConn conn = new MongoDBConn();
-		ArrayList<String> users = conn.connByID("users", id);
+		ArrayList<String> users = MongoDBConn.connByID("users", id);
 		jCourse = new JSONObject();
 		jCourse = parseCourseObject(users.get(0));
 	}
 	
 	public static void deleteCourse(String id) {
-		MongoDBConn conn = new MongoDBConn();
-		conn.delete("courses", id);
+		MongoDBConn.delete("courses", id);
 		Desktop.initRootLayout();
 	}
 
@@ -90,8 +86,7 @@ public class Courses {
 		FileReader reader = new FileReader("course.json");
 		Object obj = parserJSON.parse(reader);
 		Document doc = Document.parse(obj.toString());
-		MongoDBConn mongoDB = new MongoDBConn();
-		mongoDB.insert("courses", doc);
+		MongoDBConn.insert("courses", doc);
 	}
 	
 	private static void updateValues(JsonObject js, String item, String value) {

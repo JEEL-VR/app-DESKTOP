@@ -85,6 +85,7 @@ public class DesktopViewController {
 	}
 	
 	public void initialize() throws FileNotFoundException{		
+		
 		Users.getAllUsers();
 		users = Users.getjUsers();
 		
@@ -211,6 +212,10 @@ public class DesktopViewController {
 			teachersToUsers.setDisable(true);
 			
 			title.setOnMouseClicked(e ->{
+				
+				Courses.getAllCourses();
+				courses = Courses.getjCourses();
+				
 				titleCourse.setText(strTitle);
 				descCourse.setText(desc);
 				ArrayList<ArrayList> allUsers = new ArrayList<ArrayList>();
@@ -274,12 +279,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> studentsArray = new ArrayList<String>();
-//					for(int s = 0; s < studentsJSON.size(); s++) {
-//						studentsArray.add(studentsJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);				
 				});
 				
@@ -299,12 +298,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> studentsArray = new ArrayList<String>();
-//					for(int s = 0; s < studentsJSON.size(); s++) {
-//						studentsArray.add(studentsJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});				
 				
@@ -325,12 +318,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> teachersArray = new ArrayList<String>();
-//					for(int s = 0; s < teachersJSON.size(); s++) {
-//						teachersArray.add(teachersJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});
 				
@@ -342,6 +329,8 @@ public class DesktopViewController {
 						JSONArray teachersArray = (JSONArray) subscribersObject.get("teachers");
 						teachersArray.remove(userID.get("$oid"));
 						thisCourse.put("teachers", teachersArray);
+						Courses.getAllCourses();
+						courses = Courses.getjCourses();
 						usersList.getItems().add((JSONObject) teachersList.getSelectionModel().getSelectedItem());
 						teachersList.getItems().remove(teachersList.getSelectionModel().getSelectedIndex());
 					}
@@ -350,12 +339,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("teachers");
-//					ArrayList<String> teachersArray = new ArrayList<String>();
-//					for(int s = 0; s < teachersJSON.size(); s++) {
-//						teachersArray.add(teachersJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});				
 			});

@@ -18,13 +18,12 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class MongoDBConn {
 	private final static Dotenv DOTENV = Dotenv.load();
+	static MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
+	static MongoClient mongoClient = new MongoClient(uri);
+	static MongoDatabase db = mongoClient.getDatabase("classVRroom");
 
 	public static ArrayList<String> conn(String colName) {
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente FIND ALL " + colName);
-			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
 			FindIterable<Document> result = collection.find();
 			ArrayList<String> colResult = new ArrayList<String>();
@@ -33,37 +32,25 @@ public class MongoDBConn {
 			}
 			;
 			return colResult;
-		}
 	}
 	
 	public static void delete(String colName, String ID) {
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente DELETE");
 			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
 			collection.deleteOne(new Document("_id", new ObjectId(ID)));
 			System.out.println("Documento " + ID + " eliminado correctamente");
-		}
 	}
 	
 	public static void insert(String colName, Document doc) {
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente INSERT");
 			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
 			collection.insertOne(doc);
 			System.out.println("Documento insertado correctamente correctamente");
-		}
 	}
 
 	public static ArrayList<String> connByItem(String colName, String item, String value) {
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente SEARCH BY ITEM");
 			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
@@ -74,13 +61,9 @@ public class MongoDBConn {
 			}
 			;
 			return colResult;
-		}
 	}
 	
 	public static ArrayList<String> connByID(String colName, String ID) {
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente SERACH BY ID " + colName);
 			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
@@ -91,12 +74,9 @@ public class MongoDBConn {
 			}
 			;
 			return colResult;
-		}
 	}
 	
 	public static void update(String colName, JSONObject item){
-		MongoClientURI uri = new MongoClientURI(DOTENV.get("DATABASE_URL"));
-		try (MongoClient mongoClient = new MongoClient(uri)) {
 			System.out.println("Connexion creada correctamente UPDATE " + colName);
 			MongoDatabase db = mongoClient.getDatabase("classVRroom");
 			MongoCollection<Document> collection = db.getCollection(colName);
@@ -110,6 +90,5 @@ public class MongoDBConn {
 			Document update = new Document();
 			update.append("$set", setData);
 			collection.updateOne(query, update);
-		}
 	}
 }
