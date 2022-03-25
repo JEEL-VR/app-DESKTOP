@@ -35,7 +35,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class DesktopViewController {
@@ -75,6 +77,9 @@ public class DesktopViewController {
 	
 	@FXML
 	private Button teachersToUsers;
+	
+	@FXML
+	private BorderPane borderPane;
 	
 	
 	static ArrayList<JSONObject> users;
@@ -172,6 +177,7 @@ public class DesktopViewController {
 			JSONObject thisCourse = courses.get(x);
 			// Name of course
 			Label title = new Label(thisCourse.get("title").toString());
+			title.setId("title");
 			title.setMinWidth(180);
 			
 			// Image of button
@@ -218,6 +224,8 @@ public class DesktopViewController {
 				
 				titleCourse.setText(strTitle);
 				descCourse.setText(desc);
+				
+				
 				ArrayList<ArrayList> allUsers = new ArrayList<ArrayList>();
 				try {
 					allUsers = showUsers(id.get("$oid").toString());
@@ -344,6 +352,7 @@ public class DesktopViewController {
 			});
 			
 			// make GridPane
+			
 			listCourses.add(title, 0, x);
 			listCourses.add(delButton, 1, x);
 			

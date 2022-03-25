@@ -16,11 +16,8 @@ public class Desktop extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("AddressApp");
-		
 		initRootLayout();
 		
-		showPersonOverview();	
 	}
 	
 	public static void initRootLayout() {
@@ -28,22 +25,13 @@ public class Desktop extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Desktop.class.getResource("deskView.fxml"));
 			rootLayout = (AnchorPane) loader.load();
+			rootLayout.setMaxSize(689, 591);
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setTitle("MOODLE");
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void showPersonOverview() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Desktop.class.getResource("deskView.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
