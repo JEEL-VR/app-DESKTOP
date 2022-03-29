@@ -32,13 +32,13 @@
                   <Pane layoutX="199.0" layoutY="87.0" prefHeight="57.0" prefWidth="102.0">
                      <children>
                         <Button fx:id="usersToTeachers" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #00fa9a;" text="AFEGIR" />
-                        <Button fx:id="teachersToUsers" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #ff4500;" text="ELIMINAR" />
+                        <Button fx:id="teachersToUsers" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #E61E50;" text="ELIMINAR" />
                      </children>
                   </Pane>
                   <Pane layoutX="199.0" layoutY="310.0" prefHeight="57.0" prefWidth="102.0">
                      <children>
                         <Button fx:id="usersToStudents" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #00fa9a;" text="AFEGIR" />
-                        <Button fx:id="studentsToUsers" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #ff4500;" text="ELIMINAR" />
+                        <Button fx:id="studentsToUsers" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #E61E50;" text="ELIMINAR" />
                      </children>
                   </Pane>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="313.0" layoutY="5.0" prefHeight="17.0" prefWidth="180.0" text="PROFESSORS" />

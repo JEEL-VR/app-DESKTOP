@@ -25,7 +25,6 @@ public class Desktop extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Desktop.class.getResource("deskView.fxml"));
 			rootLayout = (AnchorPane) loader.load();
-			rootLayout.setMaxSize(689, 591);
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setTitle("MOODLE");
 			primaryStage.setScene(scene);
