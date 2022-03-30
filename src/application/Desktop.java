@@ -16,11 +16,8 @@ public class Desktop extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("AddressApp");
-		
 		initRootLayout();
 		
-		showPersonOverview();	
 	}
 	
 	public static void initRootLayout() {
@@ -39,16 +36,6 @@ public class Desktop extends Application {
 		}
 	}
 	
-	public static void showPersonOverview() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Desktop.class.getResource("deskView.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
@@ -57,3 +44,4 @@ public class Desktop extends Application {
 		launch(args);
 	}
 }
+ 
