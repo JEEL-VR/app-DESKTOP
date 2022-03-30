@@ -35,7 +35,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class DesktopViewController {
@@ -76,6 +78,9 @@ public class DesktopViewController {
 	@FXML
 	private Button teachersToUsers;
 	
+	@FXML
+	private BorderPane borderPane;
+	
 	
 	static ArrayList<JSONObject> users;
 	static ArrayList<JSONObject> courses;
@@ -85,6 +90,7 @@ public class DesktopViewController {
 	}
 	
 	public void initialize() throws FileNotFoundException{		
+		
 		Users.getAllUsers();
 		users = Users.getjUsers();
 		
@@ -171,6 +177,7 @@ public class DesktopViewController {
 			JSONObject thisCourse = courses.get(x);
 			// Name of course
 			Label title = new Label(thisCourse.get("title").toString());
+			title.setId("title");
 			title.setMinWidth(180);
 			
 			// Image of button
@@ -211,8 +218,14 @@ public class DesktopViewController {
 			teachersToUsers.setDisable(true);
 			
 			title.setOnMouseClicked(e ->{
+				
+				Courses.getAllCourses();
+				courses = Courses.getjCourses();
+				
 				titleCourse.setText(strTitle);
 				descCourse.setText(desc);
+				
+				
 				ArrayList<ArrayList> allUsers = new ArrayList<ArrayList>();
 				try {
 					allUsers = showUsers(id.get("$oid").toString());
@@ -274,12 +287,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> studentsArray = new ArrayList<String>();
-//					for(int s = 0; s < studentsJSON.size(); s++) {
-//						studentsArray.add(studentsJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);				
 				});
 				
@@ -299,12 +306,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray studentsJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> studentsArray = new ArrayList<String>();
-//					for(int s = 0; s < studentsJSON.size(); s++) {
-//						studentsArray.add(studentsJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});				
 				
@@ -325,12 +326,6 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("students");
-//					ArrayList<String> teachersArray = new ArrayList<String>();
-//					for(int s = 0; s < teachersJSON.size(); s++) {
-//						teachersArray.add(teachersJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});
 				
@@ -342,6 +337,8 @@ public class DesktopViewController {
 						JSONArray teachersArray = (JSONArray) subscribersObject.get("teachers");
 						teachersArray.remove(userID.get("$oid"));
 						thisCourse.put("teachers", teachersArray);
+						Courses.getAllCourses();
+						courses = Courses.getjCourses();
 						usersList.getItems().add((JSONObject) teachersList.getSelectionModel().getSelectedItem());
 						teachersList.getItems().remove(teachersList.getSelectionModel().getSelectedIndex());
 					}
@@ -350,17 +347,12 @@ public class DesktopViewController {
 					usersToStudents.setDisable(true);
 					studentsToUsers.setDisable(true);
 					teachersToUsers.setDisable(true);
-//					JSONObject subscribersObject = (JSONObject) thisCourse.get("subscribers");
-//					JSONArray teachersJSON = (JSONArray) subscribersObject.get("teachers");
-//					ArrayList<String> teachersArray = new ArrayList<String>();
-//					for(int s = 0; s < teachersJSON.size(); s++) {
-//						teachersArray.add(teachersJSON.get(s).toString());
-//					}
 					Courses.updateCourse(thisCourse);
 				});				
 			});
 			
 			// make GridPane
+			
 			listCourses.add(title, 0, x);
 			listCourses.add(delButton, 1, x);
 			

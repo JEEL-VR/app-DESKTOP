@@ -1,0 +1,49 @@
+.label{
+	-fx-background-color : #159A9C;
+	-fx-border-color:  #DEEFE7;
+}
+
+.text{
+	-fx-fill: #FFFFFF;
+}
+
+.button{
+	-fx-background-color : #159A9C;
+}
+
+.border{
+	-fx-border-color:  #DEEFE7;
+}
+
+/*Info of courses*/
+#titleCourse .text{
+	-fx-fill : black;
+}
+
+ #descCourse .text{
+	-fx-fill : black;
+}
+
+/*Name of courses*/
+#title {
+	-fx-background-color : #FFFFFF;
+}
+
+#title .text{
+	-fx-fill : black;
+}
+
+/*List of users*/
+.list-view .text{
+	-fx-fill: black;
+}
+
+
+/*List of courses*/
+.scroll-pane > .viewport{
+	-fx-background-color: transparent;
+}
+
+.scroll-pane{
+	-fx-background-color: transparent;
+}
