@@ -17,8 +17,7 @@ public class Users {
 	
 	public static void getAllUsers() {
 		JSONParser jsonParser = new JSONParser();
-		MongoDBConn conn = new MongoDBConn();
-		ArrayList<String> courses = conn.conn("users");
+		ArrayList<String> courses = MongoDBConn.conn("users");
 		jUsers = new ArrayList<JSONObject>();
 		courses.forEach(c -> {
 			try {
@@ -33,8 +32,7 @@ public class Users {
 	public static void getUser(String id) throws ParseException {
 		//TEST : "622f69692d0eb62c6f5befd1"
 		JSONParser jsonParser = new JSONParser();
-		MongoDBConn conn = new MongoDBConn();
-		ArrayList<String> users = conn.connByID("users", id);
+		ArrayList<String> users = MongoDBConn.connByID("users", id);
 		jUser = new JSONObject();
 		jUser = parseCourseObject(users.get(0));
 	}
